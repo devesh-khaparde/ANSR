@@ -1,0 +1,20 @@
+Sub CalculateTotalRevenue()
+    Dim LastRow As Long
+    Dim ws As Worksheet
+    Dim TotalRevenueCol As Range
+
+    ' Set the worksheet where your data is located
+    Set ws = ThisWorkbook.Worksheets("SalesData")
+
+    ' Find the last row in the data
+    LastRow = ws.Cells(ws.Rows.Count, "A").End(xlUp).Row
+
+    ' Add a new column for Total Revenue
+    Set TotalRevenueCol = ws.Cells(1, ws.Cells(1, ws.Columns.Count).End(xlToLeft).Column + 1)
+    TotalRevenueCol.Value = "Total Revenue"
+
+    ' Calculate Total Revenue for each row
+    For i = 2 To LastRow
+        ws.Cells(i, TotalRevenueCol.Column).Value = ws.Cells(i, "B").Value * ws.Cells(i, "C").Value
+    Next i
+End Sub
